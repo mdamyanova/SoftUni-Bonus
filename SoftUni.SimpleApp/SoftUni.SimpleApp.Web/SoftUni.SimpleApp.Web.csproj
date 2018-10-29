@@ -6,11 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="5.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.4" PrivateAssets="All" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SoftUni.SimpleApp.Core\SoftUni.SimpleApp.Core.csproj" />
     <ProjectReference Include="..\SoftUni.SimpleApp.Data\SoftUni.SimpleApp.Data.csproj" />
     <ProjectReference Include="..\SoftUni.SimpleApp.Services\SoftUni.SimpleApp.Services.csproj" />
   </ItemGroup>

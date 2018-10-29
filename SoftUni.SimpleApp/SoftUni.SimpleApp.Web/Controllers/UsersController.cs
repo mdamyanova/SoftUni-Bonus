@@ -1,6 +1,5 @@
 ﻿namespace SoftUni.SimpleApp.Web.Controllers
 {
-    using Data.Models;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
@@ -11,15 +10,12 @@
     public class UsersController : Controller
     {
         private readonly IUserService users;
-        private readonly UserManager<User> userManager;
-        private readonly RoleManager<IdentityRole> roleManager;
+        private readonly UserManager<IdentityUser> userManager;
 
-        public UsersController(
-            IUserService users, UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
+        public UsersController(IUserService users, UserManager<IdentityUser> userManager)
         {
             this.users = users;
             this.userManager = userManager;
-            this.roleManager = roleManager;
         }
 
         [Authorize]
@@ -81,8 +77,7 @@
 
             return this.View(new UserFormModel
             {
-                Username = user.UserName,
-                Name = user.Name
+                Username = user.UserName
             });
         }
 

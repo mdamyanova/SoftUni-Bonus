@@ -3,6 +3,7 @@
     using AutoMapper.QueryableExtensions;
     using Contracts;
     using Data;
+    using Data.Models;
     using Microsoft.EntityFrameworkCore;
     using Services.Models;
     using System.Collections.Generic;
@@ -43,11 +44,10 @@
                     .ProjectTo<UserProfileServiceModel>()
                     .FirstOrDefaultAsync();
 
-        public async Task<IEnumerable<JournalListingServiceModel>> JournalsAsync(string id)
+        public async Task<IEnumerable<Journal>> JournalsAsync(string id)
             => await this.db
                 .Journals
                 .Where(j => j.UserId == id)
-                .ProjectTo<JournalListingServiceModel>()
                 .ToListAsync();
 
         public void Edit(string username, string name)

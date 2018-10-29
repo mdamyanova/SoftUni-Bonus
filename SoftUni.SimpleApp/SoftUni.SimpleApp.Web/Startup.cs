@@ -1,6 +1,8 @@
 ﻿namespace SoftUni.SimpleApp.Web
 {
+    using AutoMapper;
     using Data;
+    using Extensions;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
@@ -34,6 +36,10 @@
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDefaultIdentity<IdentityUser>()
                 .AddEntityFrameworkStores<SimpleAppDbContext>();
+
+            services.AddAutoMapper();
+
+            services.AddDomainServices();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }

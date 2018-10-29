@@ -1,0 +1,26 @@
+﻿
+@{
+    ViewData["Title"] = "Journals";
+}
+
+<h2>Journals</h2>
+
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>
+                Name
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var journal in this.Model)
+        {
+            <tr>
+                <th>
+                    @journal.Name
+                </th>
+            </tr>
+        }
+    </tbody>
+</table>

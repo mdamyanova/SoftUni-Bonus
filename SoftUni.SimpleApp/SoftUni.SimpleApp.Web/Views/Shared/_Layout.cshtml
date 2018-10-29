@@ -32,6 +32,10 @@
                 <ul class="nav navbar-nav">
                     <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
+                    @if (this.User.Identity.IsAuthenticated)
+                    {
+                        <li><a asp-area="" asp-controller="Users" asp-action="Journals" asp-route-username="@this.User.Identity.Name">My Journals</a></li>
+                    }
                 </ul>
                 <partial name="_LoginPartial" />
             </div>

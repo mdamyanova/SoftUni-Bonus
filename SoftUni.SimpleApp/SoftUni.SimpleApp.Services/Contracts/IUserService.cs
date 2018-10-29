@@ -1,5 +1,6 @@
 ﻿namespace SoftUni.SimpleApp.Services.Contracts
 {
+    using Data.Models;
     using Models;
     using System.Collections.Generic;
     using System.Threading.Tasks;
@@ -12,7 +13,7 @@
 
         Task<UserProfileServiceModel> ProfileAsync(string username);
 
-        Task<IEnumerable<JournalListingServiceModel>> JournalsAsync(string id);
+        Task<IEnumerable<Journal>> JournalsAsync(string id);
 
         bool Remove(string id);
 
