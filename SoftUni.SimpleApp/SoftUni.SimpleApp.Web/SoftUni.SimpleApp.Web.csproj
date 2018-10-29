@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SoftUni.SimpleApp.Data\SoftUni.SimpleApp.Data.csproj" />
+    <ProjectReference Include="..\SoftUni.SimpleApp.Services\SoftUni.SimpleApp.Services.csproj" />
   </ItemGroup>
 
 </Project>
