@@ -1,0 +1,53 @@
+﻿@model IEnumerable<EventListingModel>
+@inject UserManager<IdentityUser> UserManager
+@{
+    ViewData["Title"] = "All Events";
+}
+
+<h2 style="text-align: center; font-weight: bold">@ViewData["Title"]</h2>
+<hr style="height: 3px; background-color: #AFEEEE" />
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Start</th>
+            <th scope="col">End</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            @if (this.Model != null)
+            {
+                @foreach (var event_ in this.Model)
+                {
+                    <td>@event_.Count</td>
+                    <td>@event_.Name</td>
+                    <td>@event_.Start</td>
+                    <td>@event_.End</td>
+                    <td>
+                        <form method="POST" class="form-inline">
+                            <div asp-validation-summary="All" class="text-danger">
+                                <div class="form-group">
+                                    <label for="Tickets">Tickets</label>
+                                    <input asp-for="@event_.TicketsCount" name="tickets" class="form-control mx-sm-3">
+                                    @*<span asp-validation-for="@event_.TicketsCount" class="text-danger"></span>*@
+                                    <button type="submit" class="btn btn-default" style="background-color: #AFEEEE"
+                                            asp-area="" asp-controller="Orders" asp-action="Order" asp-route-username="@UserManager.GetUserName(this.User)" asp-route-eventName="@event_.Name">
+                                        Order
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </td>
+                }
+            }
+        </tr>
+    </tbody>
+</table>
+<hr style="height: 3px; background-color: #AFEEEE" />
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

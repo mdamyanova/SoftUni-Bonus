@@ -1,0 +1,32 @@
+﻿@model IEnumerable<OrderListingModel>
+@{
+    ViewData["Title"] = "All Orders";
+}
+
+<h2 style="text-align: center; font-weight: bold">@ViewData["Title"]</h2>
+<hr style="height: 3px; background-color: #AFEEEE" />
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Event</th>
+            <th scope="col">Customer</th>
+            <th scope="col">Ordered On</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (this.Model != null)
+        {
+            @foreach (var order in this.Model)
+            {
+                <tr>
+                    <th>@order.Count</th>
+                    <td>@order.EventName</td>
+                    <td>@order.CustomerName</td>
+                    <td>@order.OrderedOn</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+<hr style="height: 3px; background-color: #AFEEEE" />
