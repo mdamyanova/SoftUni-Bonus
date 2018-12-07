@@ -23,7 +23,6 @@ namespace Eventures.Web.Models
         public DateTime End { get; set; }
 
         [Required]
-        [MinLength(WebConstants.TotalTicketsMinNumber)]
         public int TotalTickets { get; set; }
 
         public decimal PricePerTicket { get; set; }

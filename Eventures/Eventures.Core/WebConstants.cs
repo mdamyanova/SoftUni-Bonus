@@ -7,5 +7,6 @@
         public const int UniqueCitizenNumberLength = 10;
         public const int EventNameMinLength = 10;
         public const int TotalTicketsMinNumber = 1;
+        public const int EventsPageSize = 10;
     }
 }

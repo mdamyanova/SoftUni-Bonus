@@ -1,4 +1,4 @@
-﻿namespace SoftUni.SimpleApp.Core.Mapping
+﻿namespace Eventures.Core.Mapping
 {
     public interface IMapFrom<TModel>
     {

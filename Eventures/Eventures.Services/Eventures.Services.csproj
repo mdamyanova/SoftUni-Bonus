@@ -5,6 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Eventures.Core\Eventures.Core.csproj" />
     <ProjectReference Include="..\Eventures.Data\Eventures.Data.csproj" />
   </ItemGroup>
 

@@ -1,8 +1,11 @@
 ﻿namespace Eventures.Services.Models
 {
+    using AutoMapper;
+    using Core.Mapping;
+    using Data.Models;
     using System;
 
-    public class EventListingModel
+    public class EventListingModel : IMapFrom<Event>
     {
         public int Count { get; set; }
 
@@ -14,6 +17,10 @@
 
         public decimal PricePerTicket { get; set; }
 
-        public int TicketsCount { get; set; }
+        public int TotalTickets { get; set; }
+
+        //public void ConfigureMapping(Profile mapper)
+        //    => mapper.CreateMap<Event, EventListingModel>()
+        //    .ForMember(e => e.Count, cfg => cfg.Ignore());
     }
 }

@@ -6,12 +6,14 @@
 
     public interface IEventService
     {
-        IEnumerable<EventListingModel> All();
+        IEnumerable<EventListingModel> All(int page);
 
         IEnumerable<MyEventsListingModel> ByUser(string id);
 
         void Create(Event model);
 
         bool Exists(string name);
+
+        int Total();
     }
 }

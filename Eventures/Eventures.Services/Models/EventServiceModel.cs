@@ -10,6 +10,6 @@
 
         public DateTime End { get; set; }
 
-        public int Tickets { get; set; } // Map this
+        public int TotalTickets { get; set; }
     }
 }

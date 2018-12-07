@@ -1,4 +1,4 @@
-﻿@model IEnumerable<EventListingModel>
+﻿@model EventListingViewModel
 @inject UserManager<IdentityUser> UserManager
 @{
     ViewData["Title"] = "All Events";
@@ -17,11 +17,11 @@
         </tr>
     </thead>
     <tbody>
-        <tr>
-            @if (this.Model != null)
+        @if (this.Model.Events != null)
+        {
+            @foreach (var event_ in this.Model.Events)
             {
-                @foreach (var event_ in this.Model)
-                {
+                <tr>
                     <td>@event_.Count</td>
                     <td>@event_.Name</td>
                     <td>@event_.Start</td>
@@ -31,7 +31,7 @@
                             <div asp-validation-summary="All" class="text-danger">
                                 <div class="form-group">
                                     <label for="Tickets">Tickets</label>
-                                    <input asp-for="@event_.TicketsCount" name="tickets" class="form-control mx-sm-3">
+                                    <input asp-for="@event_.TotalTickets" name="tickets" class="form-control mx-sm-3">
                                     @*<span asp-validation-for="@event_.TicketsCount" class="text-danger"></span>*@
                                     <button type="submit" class="btn btn-default" style="background-color: #AFEEEE"
                                             asp-area="" asp-controller="Orders" asp-action="Order" asp-route-username="@UserManager.GetUserName(this.User)" asp-route-eventName="@event_.Name">
@@ -41,11 +41,28 @@
                             </div>
                         </form>
                     </td>
-                }
+                </tr>
             }
-        </tr>
+        }
     </tbody>
 </table>
+@if (this.Model.TotalEvents > this.Model.Events.Count())
+{
+    <ul class="pagination">
+        <li class="@(Model.CurrentPage == 1 ? "disabled" : string.Empty)">
+            <a asp-route-page="@Model.PreviousPage"
+               aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+        <li class="@(Model.CurrentPage == Model.TotalPages ? "disabled" : string.Empty)">
+            <a asp-route-page="@Model.NextPage"
+               aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+    </ul>
+}
 <hr style="height: 3px; background-color: #AFEEEE" />
 
 @section Scripts {

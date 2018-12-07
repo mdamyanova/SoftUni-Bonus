@@ -12,6 +12,6 @@
 
         public DateTime End { get; set; }
 
-        public int TicketsCount { get; set; }
+        public int TotalTickets { get; set; }
     }
 }

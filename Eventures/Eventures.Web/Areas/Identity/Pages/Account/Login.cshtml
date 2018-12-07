@@ -23,16 +23,6 @@
                         <input asp-for="Input.Password" class="form-control" placeholder="Password..." />
                         <span asp-validation-for="Input.Password" class="text-danger"></span>
                     </div>
-                    <hr style="height: 3px; background-color: #AFEEEE" />
-                    <div class="form-group">
-                        <div class="checkbox">
-                            <label asp-for="Input.RememberMe">
-                                <input asp-for="Input.RememberMe" />
-                                @Html.DisplayNameFor(m => m.Input.RememberMe)
-                            </label>
-                        </div>
-                    </div>
-                    <hr style="height: 3px; background-color: #AFEEEE" />
                     <div class="form-group">
                         <button type="submit" class="btn btn-default" style="background-color: #AFEEEE">Login</button>
                     </div>
@@ -45,6 +35,34 @@
                         </p>
                     </div>
                 </form>
+                <hr style="height: 3px; background-color: #AFEEEE" />
+                <div>
+                    @{
+                        if ((Model.ExternalLogins?.Count ?? 0) == 0)
+                        {
+                            <div>
+                                <p>
+                                    There are no external authentication services configured. See <a href="https://go.microsoft.com/fwlink/?LinkID=532715">this article</a>
+                                    for details on setting up this ASP.NET application to support logging in via external services.
+                                </p>
+                            </div>
+                        }
+                        else
+                        {
+                            <form asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
+                                <div>
+                                    <p>
+                                        @foreach (var provider in Model.ExternalLogins)
+                                        {
+                                            <button type="submit" class="btn btn-default" name="provider" style="background-color: #AFEEEE" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
+                                        }
+                                    </p>
+                                </div>
+                            </form>
+                        }
+                    }
+                </div>
+                <hr style="height: 3px; background-color: #AFEEEE" />
             </section>
         </div>
     </div>

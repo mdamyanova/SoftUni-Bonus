@@ -1,8 +1,10 @@
 ﻿namespace Eventures.Services.Implementations
 {
+    using AutoMapper;
     using Contracts;
     using Data;
     using Data.Models;
+    using Eventures.Core;
     using Models;
     using System;
     using System.Collections.Generic;
@@ -11,13 +13,15 @@
     public class EventService : IEventService
     {
         private readonly EventuresDbContext db;
+        private readonly IMapper mapper;
 
-        public EventService(EventuresDbContext db)
+        public EventService(EventuresDbContext db, IMapper mapper)
         {
             this.db = db;
+            this.mapper = mapper;
         }
 
-        public IEnumerable<EventListingModel> All()
+        public IEnumerable<EventListingModel> All(int page = 1)
         {
             var events = this.db.Events;
             var result = new List<EventListingModel>();
@@ -25,20 +29,24 @@
 
             foreach (var event_ in events)
             {
+                // TODO
                 var newEvent = new EventListingModel
                 {
                     Count = count,
                     Name = event_.Name,
                     Start = event_.Start,
                     End = event_.End,
-                    PricePerTicket = event_.PricePerTicket
+                    PricePerTicket = event_.PricePerTicket,
+                    TotalTickets = event_.TotalTickets
                 };
 
                 result.Add(newEvent);
                 count++;
             }
 
-            return result;
+            return result
+                .Skip((page - 1) * WebConstants.EventsPageSize)
+                .Take(WebConstants.EventsPageSize);
         }
 
         public IEnumerable<MyEventsListingModel> ByUser(string id)
@@ -51,14 +59,7 @@
             {
                 var event_ = this.db.Events.FirstOrDefault(e => e.Id == order.EventId);
 
-                var newOrder = new MyEventsListingModel
-                {
-                    Count = count,
-                    EventName = event_.Name,
-                    Start = event_.Start,
-                    End = event_.End,
-                    TicketsCount = order.TicketsCount
-                };
+                var newOrder = this.mapper.Map<MyEventsListingModel>(event_);
 
                 count++;
                 result.Add(newOrder);
@@ -80,5 +81,8 @@
 
         public bool Exists(string name)
             => this.db.Events.Any(e => e.Name == name);
+
+        public int Total()
+            => this.db.Events.Count();
     }
 }

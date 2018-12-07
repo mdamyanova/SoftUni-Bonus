@@ -1,5 +1,6 @@
 ﻿namespace Eventures.Web
 {
+    using AutoMapper;
     using Data;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
@@ -49,6 +50,13 @@
             services.AddTransient<IEventService, EventService>();
             services.AddTransient<IOrderService, OrderService>();
 
+            services.AddAuthentication().AddFacebook(facebookOptions =>
+            {
+                facebookOptions.AppId = "712310922501018";
+                facebookOptions.AppSecret = "6e8c7ddd7b8b894217dbf378a11aeeb9";
+            });
+
+            services.AddAutoMapper();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 

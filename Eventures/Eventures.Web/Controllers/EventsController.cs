@@ -1,11 +1,12 @@
 ﻿namespace Eventures.Web.Controllers
 {
     using Data;
-    using Models;
+    using Data.Models;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
+    using Models;
     using Services.Contracts;
-    using Eventures.Data.Models;
+    using Services.Models;
 
     public class EventsController : Controller
     {
@@ -18,12 +19,13 @@
             this.service = service;
         }
 
-        public IActionResult All()
-        {
-            var allEvents = this.service.All();
-
-            return this.View(allEvents);
-        }
+        public IActionResult All(int page = 1)
+            => this.View(new EventListingViewModel
+            {
+                Events = this.service.All(page),
+                TotalEvents = this.service.Total(),
+                CurrentPage = page
+            });
 
         public IActionResult MyEvents(string id)
         {
